@@ -9,6 +9,9 @@ Usage:	./pcimem { sys file } { offset } [ type [ data ] ]
 	type    : access operation type : [b]yte, [h]alfword, [w]ord, [d]ouble-word
 	data    : data to be written
 
+For verbose mode create pcimemv as a link to pcimem and run it:
+bash# ln -sf pcimem pcimemv
+
 == Platform Support ==
 
 WARNING !!  This method is platform dependent and may not work on your
@@ -16,13 +19,19 @@ particular target architecture.  Refer to the PowerPC section below.
 
 == Example ==
 
-bash# ./pcimem /sys/bus/pci/devices/0001:07:00.0/resource0  0 w
+Verbose mode using pcimemv
+
+bash# ./pcimemv /sys/bus/pci/devices/0001:07:00.0/resource0  0 w
   /sys/bus/pci/devices/0001:07:00.0/resource0 opened.
   Target offset is 0x0, page size is 4096
   mmap(0, 4096, 0x3, 0x1, 3, 0x0)
   PCI Memory mapped to address 0x4801f000.
   Value at offset 0x0 (0x4801f000): 0xC0BE0100
 
+Simple mode using pcimem
+
+bash# ./pcimem /sys/bus/pci/devices/0001:07:00.0/resource0  0 w
+  0x00000000: 0xC0BE0100
 
 == Why do this at all ? ==
 
